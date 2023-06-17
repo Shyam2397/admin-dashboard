@@ -1,10 +1,15 @@
-export default function NavSideBar() {
+import { useNavigate } from "react-router-dom"
+
+
+
+export default function NavSideBar({children}) {
+    const navigate = useNavigate()
     return (
-        <div className="drawer lg:drawer-open">
+        <div className="drawer lg:drawer-open z-50 ">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col">
                 {/* Navbar */}
-                <div className="w-full navbar bg-base-300">
+                <div className="w-full navbar bg-base-200">
                     <div className="flex-none lg:hidden">
                         <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -15,79 +20,118 @@ export default function NavSideBar() {
                         <ul className="menu menu-horizontal">
                             {/* Navbar menu content here */}
                             <li><h1 className="text-2xl">Name</h1></li>
-                            <div className="dropdown dropdown-end">
+                            <div className="dropdown dropdown-end z-20">
                                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                     <div className="w-10 rounded-full">
                                         <img src="https://static.vecteezy.com/system/resources/previews/005/544/718/original/profile-icon-design-free-vector.jpg" />
                                     </div>
                                 </label>
                                 <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                                    <li>
+                                    <li
+                                        onClick={()=>navigate("/profile")}
+                                    >
                                         <a className="justify-between">
                                             Profile
                                             <span className="badge">New</span>
                                         </a>
                                     </li>
-                                    <li><a>Settings</a></li>
-                                    <li><a>Logout</a></li>
+                                    <li
+                                        onClick={()=>navigate("/settings")}
+                                    ><a>Settings</a></li>
+                                    <li 
+                                        onClick={()=>navigate("/login")}
+                                    ><a>Logout</a></li>
                                 </ul>
                             </div>
                         </ul>
                     </div>
                 </div>
-                {/* Page content here */}
-                
+                <div className="grid h-screen m-2 card bg-base-200 rounded-box">
+                    {children}
+                </div>
             </div>
+            
             <div className="drawer-side">
                 <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-                <ul className="menu p-4 w-80 h-full bg-base-200">
+                <ul className="menu p-4 w-80 h-full text-white bg-blue-500">
                     {/* Sidebar content here */}
-                    <li className="text-2xl px-20"><a>ADMIN</a></li>
+                    <li
+                        onClick={()=>navigate("/")}
+                    ><a className="m-2 hover:bg-base-300 justify-center text-2xl font-bold">ADMIN</a></li>
                     <hr />
-                    <li className="py-2"><a>Dashboard</a></li>
+                    <li 
+                        onClick={()=>navigate("/")}
+                    ><a className="hover:bg-base-300 py-4">Dashboard</a></li>
                     <hr />
                     <header className="text-xs pt-3">INTERFACE</header>
                     <div className="dropdown">
-                        <label tabIndex={0} className="btn w-full justify-start text-xs m-1">Components</label>
-                        <ul tabIndex={0} className="dropdown-content menu z-10 p-2 shadow bg-base-100 rounded-box w-52">
+                        <label tabIndex={0} className="btn w-full text-white bg-blue-500 border-none justify-start text-xs m-1 hover:text-black">Components</label>
+                        <ul tabIndex={0} className="dropdown-content menu z-10 p-2 shadow text-black bg-base-100 rounded-box w-52">
                             <header className="text-center opacity-60">Custom Components:</header>
-                            <li><a>Buttons</a></li>
-                            <li><a>Cards</a></li>
+                            <li 
+                                onClick={()=>navigate("/button")}
+                            ><a>Buttons</a></li>
+                            <li
+                                onClick={()=>navigate("/cards")}
+                            ><a>Cards</a></li>
                         </ul>
                     </div>
                     <div className="dropdown">
-                        <label tabIndex={0} className="btn w-full justify-start text-xs m-1">Utilities</label>
-                        <ul tabIndex={0} className="dropdown-content menu z-10 p-2 shadow bg-base-100 rounded-box w-52">
+                        <label tabIndex={0} className="btn w-full text-white bg-blue-500 border-none justify-start text-xs m-1 hover:text-black">Utilities</label>
+                        <ul tabIndex={0} className="dropdown-content menu z-10 p-2 shadow text-black bg-base-100 rounded-box w-52">
                             <header className="text-center opacity-60">Custom Utilities:</header>
-                            <li><a>Colors</a></li>
-                            <li><a>Borders</a></li>
-                            <li><a>Animations</a></li>
-                            <li><a>Other</a></li>
+                            <li
+                                onClick={()=>navigate("/colors")}
+                            ><a>Colors</a></li>
+                            <li
+                                onClick={()=>navigate("/borders")}
+                            ><a>Borders</a></li>
+                            <li
+                                onClick={()=>navigate("/animations")}
+                            ><a>Animations</a></li>
+                            <li
+                                onClick={()=>navigate("/other")}
+                            ><a>Other</a></li>
                         </ul>
                     </div>
                     <hr />
                     <header className="text-xs pt-3">ADDONS</header>
                     <div className="dropdown">
-                        <label tabIndex={0} className="btn w-full justify-start text-xs m-1">Pages</label>
-                        <ul tabIndex={0} className="dropdown-content menu z-10 p-2 shadow bg-base-100 rounded-box w-52">
+                        <label tabIndex={0} className="btn w-full text-white bg-blue-500 border-none justify-start text-xs m-1 hover:text-black">Pages</label>
+                        <ul tabIndex={0} className="dropdown-content menu z-10 p-2 shadow text-black bg-base-100 rounded-box w-52">
                             <header className="text-center opacity-60">Login Screen:</header>
-                            <li><a>Login</a></li>
-                            <li><a>Register</a></li>
-                            <li><a>Forgot Password</a></li>
+                            <li
+                                onClick={()=>navigate("/login")}
+                            ><a>Login</a></li>
+                            <li
+                                onClick={()=>navigate("/register")}
+                            ><a>Register</a></li>
+                            <li
+                                onClick={()=>navigate("/forgotpassword")}
+                            ><a>Forgot Password</a></li>
                             <header className="text-center opacity-60">Other pages:</header>
-                            <li><a>404 Page</a></li>
-                            <li><a>Blank Page</a></li>
+                            <li 
+                                onClick={()=>navigate("/404/error")}
+                            ><a>404 Page</a></li>
+                            <li
+                                onClick={()=>navigate("/blankpage")}
+                            ><a>Blank Page</a></li>
                         </ul>
                     </div>
                     <div>
-                        <li className="py-0"><a>Charts</a></li>
+                        <li
+                            onClick={()=>navigate("/charts")}
+                        ><a className="hover:bg-base-300 py-4">Charts</a></li>
                     </div>
                     <div>
-                        <li className="py-2"><a>Tables</a></li>
+                        <li
+                            onClick={()=>navigate("/tables")}
+                        ><a className="hover:bg-base-300 py-4">Tables</a></li>
                     </div>
                 </ul>
 
             </div>
         </div>
+
     )
 }
